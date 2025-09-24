@@ -33,14 +33,24 @@ const FileExplore = () => {
 
   return (
     <>
-      <div className='flex items-end justify-end'>
-        <div className=' px-2 rounded border bg-red-600 text-white cursor-pointer' onClick={() => { LogOut() }}>logout</div>
-
+      <div className="flex items-start justify-between p-6 bg-gray-800">
+        <div className="flex-1">
+          <h1 className="text-2xl font-bold text-white">File Editor</h1>
+        </div>
+        <div className="flex items-center">
+          <button
+            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500 transition duration-300"
+            onClick={() => { LogOut() }}
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
-      <div className='flex'>
-        <div className='w-1/2 p-4 border-r'>
-          <h2 className='text-lg font-bold'>File Explorer</h2>
+      <div className="flex h-screen">
+        {/* File Explorer */}
+        <div className="w-1/3 p-6 border-r bg-gray-100">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">File Explorer</h2>
           <FileTree
             nodeData={treeData}
             onAdd={addData}
@@ -50,27 +60,29 @@ const FileExplore = () => {
           />
         </div>
 
-        <div className='w-1/2 p-4'>
+        {/* File Editor */}
+        <div className="w-2/3 p-6 bg-white">
           {selectedFile ? (
             <div>
-              <h3 className='text-md font-semibold'>Editing: {selectedFile.name}</h3>
+              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Editing: {selectedFile.name}</h3>
               <textarea
-                className='w-full h-64 border p-2 mt-2'
+                className="w-full h-72 border border-gray-300 rounded-md p-4 mb-4 focus:ring-2 focus:ring-blue-500"
                 value={fileContent}
                 onChange={e => setFileContent(e.target.value)}
               />
               <button
-                className='mt-2 px-4 py-1 bg-blue-500 text-white rounded'
+                className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition duration-300"
                 onClick={handleSave}
               >
                 Save
               </button>
             </div>
           ) : (
-            <p>Select a file to edit.</p>
+            <p className="text-gray-600">Select a file to edit.</p>
           )}
         </div>
       </div>
+
     </>
   );
 };
